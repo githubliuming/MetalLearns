@@ -24,7 +24,7 @@ public class QYDisplayView: UIView {
 
     private let device: MTLDevice? = MTLCreateSystemDefaultDevice()
     private var commonQueue: MTLCommandQueue?
-    private var pipelineState:MTLRenderPipelineState?
+    private var pipelineState: MTLRenderPipelineState?
 
     private var metalLayer: CAMetalLayer {
         return self.layer as! CAMetalLayer
@@ -52,21 +52,21 @@ public class QYDisplayView: UIView {
     private func commonInit() {
         metalLayer.device = device
         commonQueue = device?.makeCommandQueue()
-        self.setupPipeline()
+        setupPipeline()
     }
-    private func setupPipeline() -> Void{
-        
-        let library = self.device?.makeDefaultLibrary()
+
+    private func setupPipeline() {
+        let library = device?.makeDefaultLibrary()
         let vertextFunction = library?.makeFunction(name: "vertexShader")
         let fragmentFunction = library?.makeFunction(name: "fragmentShader")
-        
-        let pipelineDescriptor = MTLRenderPipelineDescriptor.init()
+
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertextFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.colorAttachments[0].pixelFormat = self.metalLayer.pixelFormat
-        self.pipelineState = try! device?.makeRenderPipelineState(descriptor: pipelineDescriptor)
-        
+        pipelineDescriptor.colorAttachments[0].pixelFormat = metalLayer.pixelFormat
+        pipelineState = try! device?.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
+
     private func render() {
         guard let drawnable = self.metalLayer.nextDrawable() else {
             print("获取到的 drawnable 对象为空")
@@ -83,21 +83,23 @@ public class QYDisplayView: UIView {
         // 配置 buffer ecoder
         let commandBuffer = commonQueue?.makeCommandBuffer()
         let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescripor)
-        
+
         // MARK: -  添加部分
-        commandEncoder?.setRenderPipelineState(self.pipelineState!)
+
+        commandEncoder?.setRenderPipelineState(pipelineState!)
         let vertices = [
             QYVertex(position: [0.5, -0.5], color: [1, 0, 0, 1]),
             QYVertex(position: [-0.5, -0.5], color: [0, 1, 0, 1]),
             QYVertex(position: [0.0, 0.5], color: [0, 0, 1, 1]),
-            ]
-        
-        if #available(iOS 8.3, *){
+        ]
+
+        if #available(iOS 8.3, *) {
             commandEncoder?.setVertexBytes(vertices, length: MemoryLayout<QYVertex>.size * 3, index: 0)
         }
         commandEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
-         // MARK: - 结束
-        
+
+        // MARK: - 结束
+
         commandEncoder?.endEncoding()
         commandBuffer?.present(drawnable)
         commandBuffer?.commit()

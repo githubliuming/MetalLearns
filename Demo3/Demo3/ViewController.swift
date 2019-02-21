@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let displayView = QYDisplayView.init(frame: self.view.bounds)
+        self.view.addSubview(displayView);
     }
 
 

@@ -14,6 +14,7 @@
 		8AC50CAE221D5E7B001EA555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AC50CAC221D5E7B001EA555 /* LaunchScreen.storyboard */; };
 		8AC50CB6221D5E87001EA555 /* lena.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC50CB5221D5E87001EA555 /* lena.png */; };
 		8AC50CB8221D5EC8001EA555 /* QYDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC50CB7221D5EC8001EA555 /* QYDisplayView.swift */; };
+		8ADFCC24221E5A240010C6D0 /* QYShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8ADFCC23221E5A240010C6D0 /* QYShader.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8AC50CAF221D5E7B001EA555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AC50CB5221D5E87001EA555 /* lena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lena.png; sourceTree = "<group>"; };
 		8AC50CB7221D5EC8001EA555 /* QYDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QYDisplayView.swift; sourceTree = "<group>"; };
+		8ADFCC23221E5A240010C6D0 /* QYShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = QYShader.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				8AC50CA3221D5E7A001EA555 /* AppDelegate.swift */,
 				8AC50CA5221D5E7A001EA555 /* ViewController.swift */,
 				8AC50CB7221D5EC8001EA555 /* QYDisplayView.swift */,
+				8ADFCC23221E5A240010C6D0 /* QYShader.metal */,
 				8AC50CA7221D5E7A001EA555 /* Main.storyboard */,
 				8AC50CAA221D5E7B001EA555 /* Assets.xcassets */,
 				8AC50CAC221D5E7B001EA555 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ADFCC24221E5A240010C6D0 /* QYShader.metal in Sources */,
 				8AC50CA6221D5E7A001EA555 /* ViewController.swift in Sources */,
 				8AC50CA4221D5E7A001EA555 /* AppDelegate.swift in Sources */,
 				8AC50CB8221D5EC8001EA555 /* QYDisplayView.swift in Sources */,
@@ -290,14 +294,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FJV2B9GPDW;
 				INFOPLIST_FILE = Demo3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.Demo3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.soundman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = com.youwohudong.soundman;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -307,14 +313,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FJV2B9GPDW;
 				INFOPLIST_FILE = Demo3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.Demo3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.soundman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = com.youwohudong.soundman;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

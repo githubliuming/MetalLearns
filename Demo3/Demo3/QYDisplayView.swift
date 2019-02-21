@@ -15,16 +15,16 @@ public class QYDisplayView: UIView {
     
     private struct QYVertex {
         public var position: vector_float2
-        public var color: vector_float4
-        init(position: vector_float2, color: vector_float4) {
+        public var textureCoordinate: vector_float2
+        init(position: vector_float2, textureCoordinate: vector_float2) {
             self.position = position
-            self.color = color
+            self.textureCoordinate = textureCoordinate
         }
     }
     
     private let device = MTLCreateSystemDefaultDevice()
     private var commandQueue: MTLCommandQueue?
-    private var state: MTLRenderPipelineState?
+    private var pipelineState: MTLRenderPipelineState?
     private var texture:MTLTexture?
     private var vertexBuff:MTLBuffer?
     
@@ -38,36 +38,43 @@ public class QYDisplayView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.commandInit()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.commandInit()
     }
     private func setupPipeLine() -> Void{
         
-       let pipelineDescriptor = MTLRenderPipelineDescriptor.init()
-        
-        let library = self.device?.makeDefaultLibrary()
+        let library = device?.makeDefaultLibrary()
         let vertexFunction = library?.makeFunction(name: "vertexShader")
         let fragmentFunction = library?.makeFunction(name: "fragmentShader")
         
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.colorAttachments[0].pixelFormat = self.metalLayer.pixelFormat
-        self.state = try! device?.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        pipelineDescriptor.colorAttachments[0].pixelFormat = metalLayer.pixelFormat
+        
+        pipelineState = try! device?.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     private func commandInit() {
         self.metalLayer.device = self.device
         self.commandQueue = self.device?.makeCommandQueue()
+        self.setupBuffer()
+        self.setupTexture()
+        self.setupPipeLine()
+        
     }
     
     private func setupBuffer() -> Void{
         
         let vertices = [
-            QYVertex(position: [0.5, -0.5], color: [1, 0, 0, 1]),
-            QYVertex(position: [-0.5, -0.5], color: [0, 1, 0, 1]),
-            QYVertex(position: [0.0, 0.5], color: [0, 0, 1, 1]),
-            ]
+            QYVertex(position: [-1.0, -1.0], textureCoordinate: [0, 1]),
+            QYVertex(position: [-1.0,  1.0], textureCoordinate: [0, 0]),
+            QYVertex(position: [ 1.0, -1.0], textureCoordinate: [1, 1]),
+            QYVertex(position: [ 1.0,  1.0], textureCoordinate: [1, 0])
+        ]
         self.vertexBuff = self.device?.makeBuffer(bytes: vertices,
                                                   length: MemoryLayout<QYVertex>.size * vertices.count,
                                                   options: .cpuCacheModeWriteCombined)
@@ -88,12 +95,11 @@ public class QYDisplayView: UIView {
         let commandBuffer = self.commandQueue?.makeCommandBuffer()
         let commandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescripor)
         
-        commandEncoder?.setRenderPipelineState(self.state!)
+        commandEncoder?.setRenderPipelineState(self.pipelineState!)
         commandEncoder?.setVertexBuffer(self.vertexBuff, offset: 0, index: 0)
-        commandEncoder?.setVertexTexture(self.texture, index: 0)
-        commandEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
+        commandEncoder?.setFragmentTexture(self.texture, index: 0)
+        commandEncoder?.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
         // MARK: - 结束
-        
         commandEncoder?.endEncoding()
         commandBuffer?.present(drawnable)
         commandBuffer?.commit()
@@ -107,32 +113,28 @@ public class QYDisplayView: UIView {
     }
     private func newTexture(image:UIImage) -> MTLTexture?{
         
-        let imageRef = image.cgImage!
+        let imageRef = (image.cgImage)!
         let width = imageRef.width
-        let height = imageRef.height
+        let height = imageRef.width
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let rawData = calloc(height * width * 4, MemoryLayout<UInt8>.size)
-        let bytesPerPixel:Int = 4
-        let bytesPerRow:Int = bytesPerPixel * width
-        let bitsPerComponent:Int = 8
-        let bitmapContext = CGContext.init(data: rawData,
-                                           width: width,
-                                           height: height,
-                                           bitsPerComponent: bitsPerComponent,
-                                           bytesPerRow: bytesPerRow,
-                                           space: colorSpace,
-                                           bitmapInfo:  CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-        bitmapContext?.draw(imageRef, in: CGRect.init(x: 0,
-                                                      y: 0,
-                                                      width: CGFloat(width),
-                                                      height: CGFloat(height)))
-        let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: self.metalLayer.pixelFormat,
+        let bytesPerPixel: Int = 4
+        let bytesPerRow: Int = bytesPerPixel * width
+        let bitsPerComponent: Int = 8
+        let bitmapContext = CGContext(data: rawData,
+                                      width: width,
+                                      height: height,
+                                      bitsPerComponent: bitsPerComponent,
+                                      bytesPerRow: bytesPerRow,
+                                      space: colorSpace,
+                                      bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
+        bitmapContext?.draw(imageRef, in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
+        let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba8Unorm,
                                                                          width: width,
                                                                          height: height,
                                                                          mipmapped: false)
-        
-        let texture = self.device?.makeTexture(descriptor: textureDescriptor)
-        let region:MTLRegion = MTLRegionMake2D(0, 0, width, height)
+        let texture: MTLTexture? = device?.makeTexture(descriptor: textureDescriptor)
+        let region: MTLRegion = MTLRegionMake2D(0, 0, width, height)
         texture?.replace(region: region, mipmapLevel: 0, withBytes: rawData!, bytesPerRow: bytesPerRow)
         free(rawData)
         return texture

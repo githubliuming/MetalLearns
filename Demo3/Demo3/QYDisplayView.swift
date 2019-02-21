@@ -107,9 +107,8 @@ public class QYDisplayView: UIView {
     }
     
     private func setupTexture() -> Void{
-        
         let image = UIImage.init(named: "lena")
-       self.texture = self.newTexture(image: image!)
+        self.texture = self.newTexture(image: image!)
     }
     private func newTexture(image:UIImage) -> MTLTexture?{
         

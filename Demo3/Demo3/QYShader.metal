@@ -38,7 +38,6 @@ vertex RasterizerData vertexShader(constant YLZVertex *vertices [[buffer(YLZVert
     
     outVertex.position = vector_float4(vertices[vid].position, 0.0, 1.0);
     outVertex.texCoords = vertices[vid].textureCoordinate;
-    
     return outVertex;
 }
 

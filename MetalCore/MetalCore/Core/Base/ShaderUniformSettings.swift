@@ -8,6 +8,7 @@
 
 import Foundation
 import Metal
+
 public class ShaderUniformSettings
 {
     private var uniformValues:[Float] = []
@@ -60,7 +61,88 @@ public class ShaderUniformSettings
     public subscript(index:Int)->Position{
         
         get { return Position.init() }
-        set {}
+        set(newValue) {
+            shaderUniformSettingsQueue.async {
+                let floatArray:[Float] = newValue.toFloatArray()
+                var currentIndex = self.internalIndex(for: index)
+                for floatValue in floatArray{
+                    self.uniformValues[currentIndex] = floatValue
+                    currentIndex += 1
+                }
+            }
+        }
+    }
+    
+    public subscript(index:Int) -> Matrix3x3 {
+        get{ return Matrix3x3.indentity}
+        set(newValue){
+            shaderUniformSettingsQueue.async {
+                let floatArray = newValue.toFloatArray()
+                var currentIndex = self.internalIndex(for:index)
+                for floatValue in floatArray {
+                    self.uniformValues[currentIndex] = floatValue
+                    currentIndex += 1
+                }
+            }
+        }
+    }
+    public subscript(index: Int) -> Matrix4x4 {
+        get {
+            // TODO: Fix this
+            return Matrix4x4.identity
+        }
+        set(newValue) {
+            shaderUniformSettingsQueue.async {
+                let floatArray = newValue.toFloatArray()
+                var currentIndex = self.internalIndex(for:index)
+                for floatValue in floatArray {
+                    self.uniformValues[currentIndex] = floatValue
+                    currentIndex += 1
+                }
+            }
+        }
+    }
+    
+    //有意思 字节对齐
+    func alignPackingForOffset(uniformSize: Int, lastOffset: Int) -> Int {
+        let floatAlignment = lastOffset % 4
+        if (uniformSize > 1) && (floatAlignment != 0) {
+            let paddingToAlignment = 4 - floatAlignment
+            uniformValues.append(contentsOf:[Float](repeating:0.0, count:paddingToAlignment))
+            uniformValueOffsets[uniformValueOffsets.count - 1] = lastOffset + paddingToAlignment
+            return lastOffset + paddingToAlignment
+        } else {
+            return lastOffset
+        }
+    }
+    
+    public func appendUniform(_ value: UniformConvertible) {
+        let lastOffset = alignPackingForOffset(uniformSize:value.uniformSize(), lastOffset:uniformValueOffsets.last ?? 0)
+        
+        uniformValues.append(contentsOf:value.toFloatArray())
+        uniformValueOffsets.append(lastOffset + value.uniformSize())
+    }
+    
+    public func appendUniform(_ value: Color) {
+        let colorSize = 4
+        let lastOffset = alignPackingForOffset(uniformSize:colorSize, lastOffset:uniformValueOffsets.last ?? 0)
+        
+        if colorUniformsUseAlpha {
+            uniformValues.append(contentsOf:value.toFloatArrayWithAlpha())
+        } else {
+            uniformValues.append(contentsOf:value.toFloatArray())
+        }
+        uniformValueOffsets.append(lastOffset + colorSize)
+    }
+    
+    public func restoreShaderSettings(renderEncoder: MTLRenderCommandEncoder) {
+        shaderUniformSettingsQueue.sync {
+            guard (uniformValues.count > 0) else { return }
+//            let uniformBuffer = sharedContext.device.makeBuffer(bytes: uniformValues,
+//                                                                length: uniformValues.count * MemoryLayout<Float>.size,
+//                                                                options: [])!
+//            renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: 1)
+        }
     }
 }
 public protocol UniformConvertible {

@@ -41,7 +41,7 @@ public struct Matrix4x4{
         self.m44 = rowMajorValues[15]
     }
     
-    public static let indentity = Matrix4x4.init(rowMajorValues: [1.0, 0.0, 0.0, 0.0,
+    public static let identity = Matrix4x4.init(rowMajorValues: [1.0, 0.0, 0.0, 0.0,
                                                                   0.0, 1.0, 0.0, 0.0,
                                                                   0.0, 0.0, 1.0, 0.0,
                                                                   0.0, 0.0, 0.0, 1.0])

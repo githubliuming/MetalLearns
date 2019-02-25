@@ -21,6 +21,13 @@
 		8A85FE6A221FAF1F0072A58C /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A85FE69221FAF1F0072A58C /* Matrix.swift */; };
 		8A85FE6C221FBE6D0072A58C /* ShaderUniformSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A85FE6B221FBE6D0072A58C /* ShaderUniformSettings.swift */; };
 		8A85FE6E221FD9B50072A58C /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A85FE6D221FD9B50072A58C /* Context.swift */; };
+		8AB2B53522238C8C00B458F3 /* Pipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B53422238C8C00B458F3 /* Pipeline.swift */; };
+		8AB2B5372223A07600B458F3 /* PictureInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B5362223A07600B458F3 /* PictureInput.swift */; };
+		8AB2B5392223BC5F00B458F3 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B5382223BC5F00B458F3 /* RenderView.swift */; };
+		8AB2B53B2223C90900B458F3 /* BasicOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B53A2223C90900B458F3 /* BasicOperation.swift */; };
+		8AB2B53E2223D07100B458F3 /* Passthrough.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B53D2223D07100B458F3 /* Passthrough.metal */; };
+		8AB2B5402223D0A800B458F3 /* LookupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B53F2223D0A800B458F3 /* LookupFilter.swift */; };
+		8AB2B5422223D39600B458F3 /* LookupFilter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B5412223D39600B458F3 /* LookupFilter.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +47,14 @@
 		8A85FE69221FAF1F0072A58C /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		8A85FE6B221FBE6D0072A58C /* ShaderUniformSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderUniformSettings.swift; sourceTree = "<group>"; };
 		8A85FE6D221FD9B50072A58C /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		8AB2B53422238C8C00B458F3 /* Pipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
+		8AB2B5362223A07600B458F3 /* PictureInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureInput.swift; sourceTree = "<group>"; };
+		8AB2B5382223BC5F00B458F3 /* RenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderView.swift; sourceTree = "<group>"; };
+		8AB2B53A2223C90900B458F3 /* BasicOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperation.swift; sourceTree = "<group>"; };
+		8AB2B53C2223CF3C00B458F3 /* ShaderType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderType.h; sourceTree = "<group>"; };
+		8AB2B53D2223D07100B458F3 /* Passthrough.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Passthrough.metal; sourceTree = "<group>"; };
+		8AB2B53F2223D0A800B458F3 /* LookupFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupFilter.swift; sourceTree = "<group>"; };
+		8AB2B5412223D39600B458F3 /* LookupFilter.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LookupFilter.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +112,7 @@
 		8A85FE60221FA7F00072A58C /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
+				8AB2B5362223A07600B458F3 /* PictureInput.swift */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
@@ -104,6 +120,7 @@
 		8A85FE61221FA8020072A58C /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
+				8AB2B5382223BC5F00B458F3 /* RenderView.swift */,
 			);
 			path = Outputs;
 			sourceTree = "<group>";
@@ -111,6 +128,11 @@
 		8A85FE62221FA8160072A58C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				8AB2B53A2223C90900B458F3 /* BasicOperation.swift */,
+				8AB2B53C2223CF3C00B458F3 /* ShaderType.h */,
+				8AB2B53D2223D07100B458F3 /* Passthrough.metal */,
+				8AB2B53F2223D0A800B458F3 /* LookupFilter.swift */,
+				8AB2B5412223D39600B458F3 /* LookupFilter.metal */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -125,6 +147,7 @@
 				8A2ED04A221FED8300578171 /* Texture.swift */,
 				8A2ED04C221FF05400578171 /* FIllMode.swift */,
 				8A2ED04E221FFA7800578171 /* Rendering.swift */,
+				8AB2B53422238C8C00B458F3 /* Pipeline.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -211,15 +234,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A85FE6C221FBE6D0072A58C /* ShaderUniformSettings.swift in Sources */,
+				8AB2B5422223D39600B458F3 /* LookupFilter.metal in Sources */,
 				8A85FE50221FA7BE0072A58C /* ViewController.swift in Sources */,
 				8A85FE6A221FAF1F0072A58C /* Matrix.swift in Sources */,
+				8AB2B53522238C8C00B458F3 /* Pipeline.swift in Sources */,
 				8A85FE4E221FA7BE0072A58C /* AppDelegate.swift in Sources */,
 				8A85FE6E221FD9B50072A58C /* Context.swift in Sources */,
 				8A2ED04F221FFA7800578171 /* Rendering.swift in Sources */,
 				8A85FE68221FAA3F0072A58C /* Position.swift in Sources */,
+				8AB2B53B2223C90900B458F3 /* BasicOperation.swift in Sources */,
 				8A85FE66221FA8B30072A58C /* Color.swift in Sources */,
+				8AB2B53E2223D07100B458F3 /* Passthrough.metal in Sources */,
+				8AB2B5402223D0A800B458F3 /* LookupFilter.swift in Sources */,
 				8A2ED04B221FED8300578171 /* Texture.swift in Sources */,
 				8A2ED049221FE4AA00578171 /* Constants.swift in Sources */,
+				8AB2B5372223A07600B458F3 /* PictureInput.swift in Sources */,
+				8AB2B5392223BC5F00B458F3 /* RenderView.swift in Sources */,
 				8A2ED04D221FF05400578171 /* FIllMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,14 +396,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FJV2B9GPDW;
 				INFOPLIST_FILE = MetalCore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.MetalCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.soundman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = com.youwohudong.soundman;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -383,14 +415,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FJV2B9GPDW;
 				INFOPLIST_FILE = MetalCore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.MetalCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youwohudong.soundman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = com.youwohudong.soundman;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

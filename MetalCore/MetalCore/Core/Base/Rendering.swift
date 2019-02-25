@@ -44,6 +44,9 @@ extension MTLCommandBuffer {
                                      vertexStart: 0,
                                      vertexCount: imageVertices.count / 2)
         renderEncoder.endEncoding()
+        
+
+        
     }
 }
 

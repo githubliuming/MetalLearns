@@ -138,10 +138,10 @@ public class ShaderUniformSettings
     public func restoreShaderSettings(renderEncoder: MTLRenderCommandEncoder) {
         shaderUniformSettingsQueue.sync {
             guard (uniformValues.count > 0) else { return }
-//            let uniformBuffer = sharedContext.device.makeBuffer(bytes: uniformValues,
-//                                                                length: uniformValues.count * MemoryLayout<Float>.size,
-//                                                                options: [])!
-//            renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: 1)
+            let uniformBuffer = sharedContext.device.makeBuffer(bytes: uniformValues,
+                                                                length: uniformValues.count * MemoryLayout<Float>.size,
+                                                                options: [])!
+            renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: 1)
         }
     }
 }

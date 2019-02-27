@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     public lazy var dataSoure:[String] = {
-        let array:Array<String> = ["BrightnessFilter","Stretch"];
+        let array:Array<String> = ["BrightnessFilter","Toon","ZoomBlur"];
         return array
     }()
     
@@ -28,15 +28,16 @@ extension ViewController:UITableViewDelegate{
         let storyBoard:UIStoryboard! = UIStoryboard(name: "Main", bundle: nil)
         switch indexPath.row {
         case 0:
-            print(indexPath.row)
             let filter:ColorFilterViewController = storyBoard.instantiateViewController(withIdentifier: "ColorFilterViewController") as! ColorFilterViewController
-            self.present(filter, animated: true) {
-                
-            }
+                self.navigationController?.pushViewController(filter, animated: true)
         case 1:
-            print(indexPath.row)
+            let toonFilter = storyboard?.instantiateViewController(withIdentifier: "ToonViewController")
+            self.navigationController?.pushViewController(toonFilter!, animated: true)
+            
         case 2:
-            print(indexPath.row)
+            let zoomBlurFilter = storyBoard.instantiateViewController(withIdentifier: "ZoomBlurViewController")
+            self.navigationController?.pushViewController(zoomBlurFilter, animated: true)
+            
         case 3:
             print(indexPath.row)
         default:do {

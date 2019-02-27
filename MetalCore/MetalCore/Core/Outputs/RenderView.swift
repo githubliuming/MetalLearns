@@ -52,7 +52,6 @@ public class RenderView: UIView {
 extension RenderView: ImageConsumer {
     public func newTextureAvailbalbe(texture: Texture, fromSourceIndex: UInt) {
         currentTexture = texture
-        
         metalView.draw()
     }
 }

@@ -36,6 +36,11 @@ public class PictureInput: ImageSource {
             if synchronously {
                 updateTargetsWithTexture(texture: texture)
                 hasProcessedImage = true
+            } else {
+                DispatchQueue.global().async {
+                    self.updateTargetsWithTexture(texture: texture)
+                    self.hasProcessedImage = true
+                }
             }
         } else {
             // 未加载过纹理, 先加载纹理然后再处理

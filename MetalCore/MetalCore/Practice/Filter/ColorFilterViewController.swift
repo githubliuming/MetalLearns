@@ -32,12 +32,7 @@ class ColorFilterViewController: UIViewController {
         abaoFilter.lookupImage = PictureInput(image:UIImage(named:"lut_abao.png")!)
         abaoFilter.intensity = 0.0
         
-//        picture --> saturationFilter --> brightnessFilter --> abaoFilter --> renderView
-        picture.addTarget(target: saturationFilter)
-        saturationFilter.addTarget(target: brightnessFilter)
-        brightnessFilter.addTarget(target: abaoFilter)
-        abaoFilter.addTarget(target: renderView)
-        
+       let _ = picture --> saturationFilter --> brightnessFilter --> abaoFilter --> renderView
         picture.processImage()
     }
 

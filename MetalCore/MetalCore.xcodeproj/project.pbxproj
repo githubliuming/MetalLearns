@@ -45,6 +45,12 @@
 		8AB2B5682223ED5F00B458F3 /* ColorFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B5672223ED5E00B458F3 /* ColorFilterViewController.swift */; };
 		8AB2B5692223F91D00B458F3 /* BrightnessFilter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B5612223E82800B458F3 /* BrightnessFilter.metal */; };
 		8AB2B56A2223F93800B458F3 /* SaturationFilter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8AB2B5652223E91F00B458F3 /* SaturationFilter.metal */; };
+		8AFD4F912224EF8300EA654A /* ToonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD4F902224EF8300EA654A /* ToonFilter.swift */; };
+		8AFD4F93222502B700EA654A /* ToonFilter.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD4F92222502B700EA654A /* ToonFilter.metal */; };
+		8AFD4F952225063500EA654A /* ToonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD4F942225063500EA654A /* ToonViewController.swift */; };
+		8AFD4F9822250BD400EA654A /* ZoomBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD4F9722250BD400EA654A /* ZoomBlur.swift */; };
+		8AFD4F9A22250C7600EA654A /* ZommBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD4F9922250C7600EA654A /* ZommBlur.metal */; };
+		8AFD4F9C22250CD800EA654A /* ZoomBlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD4F9B22250CD800EA654A /* ZoomBlurViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +95,12 @@
 		8AB2B5632223E89500B458F3 /* SaturationFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaturationFilter.swift; sourceTree = "<group>"; };
 		8AB2B5652223E91F00B458F3 /* SaturationFilter.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SaturationFilter.metal; sourceTree = "<group>"; };
 		8AB2B5672223ED5E00B458F3 /* ColorFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorFilterViewController.swift; sourceTree = "<group>"; };
+		8AFD4F902224EF8300EA654A /* ToonFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToonFilter.swift; sourceTree = "<group>"; };
+		8AFD4F92222502B700EA654A /* ToonFilter.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ToonFilter.metal; sourceTree = "<group>"; };
+		8AFD4F942225063500EA654A /* ToonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToonViewController.swift; sourceTree = "<group>"; };
+		8AFD4F9722250BD400EA654A /* ZoomBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomBlur.swift; sourceTree = "<group>"; };
+		8AFD4F9922250C7600EA654A /* ZommBlur.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ZommBlur.metal; sourceTree = "<group>"; };
+		8AFD4F9B22250CD800EA654A /* ZoomBlurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomBlurViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +230,8 @@
 		8AB2B5582223DA8A00B458F3 /* Practice */ = {
 			isa = PBXGroup;
 			children = (
+				8AFD4F9622250BB500EA654A /* ZoomBlur */,
+				8AFD4F8F2224EF6F00EA654A /* Toon */,
 				8AB2B55E2223E75600B458F3 /* Filter */,
 				8AB2B55D2223E73100B458F3 /* Stretch */,
 			);
@@ -243,6 +257,26 @@
 				8AB2B5672223ED5E00B458F3 /* ColorFilterViewController.swift */,
 			);
 			path = Filter;
+			sourceTree = "<group>";
+		};
+		8AFD4F8F2224EF6F00EA654A /* Toon */ = {
+			isa = PBXGroup;
+			children = (
+				8AFD4F902224EF8300EA654A /* ToonFilter.swift */,
+				8AFD4F92222502B700EA654A /* ToonFilter.metal */,
+				8AFD4F942225063500EA654A /* ToonViewController.swift */,
+			);
+			path = Toon;
+			sourceTree = "<group>";
+		};
+		8AFD4F9622250BB500EA654A /* ZoomBlur */ = {
+			isa = PBXGroup;
+			children = (
+				8AFD4F9722250BD400EA654A /* ZoomBlur.swift */,
+				8AFD4F9922250C7600EA654A /* ZommBlur.metal */,
+				8AFD4F9B22250CD800EA654A /* ZoomBlurViewController.swift */,
+			);
+			path = ZoomBlur;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,23 +360,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AFD4F93222502B700EA654A /* ToonFilter.metal in Sources */,
 				8AB2B55A2223DB0500B458F3 /* StretchViewController.swift in Sources */,
 				8A85FE6C221FBE6D0072A58C /* ShaderUniformSettings.swift in Sources */,
 				8AB2B5692223F91D00B458F3 /* BrightnessFilter.metal in Sources */,
 				8AB2B5422223D39600B458F3 /* LookupFilter.metal in Sources */,
 				8A85FE50221FA7BE0072A58C /* ViewController.swift in Sources */,
+				8AFD4F952225063500EA654A /* ToonViewController.swift in Sources */,
 				8A85FE6A221FAF1F0072A58C /* Matrix.swift in Sources */,
 				8AB2B5682223ED5F00B458F3 /* ColorFilterViewController.swift in Sources */,
+				8AFD4F912224EF8300EA654A /* ToonFilter.swift in Sources */,
 				8AB2B5602223E77F00B458F3 /* BrightnessFilter.swift in Sources */,
+				8AFD4F9A22250C7600EA654A /* ZommBlur.metal in Sources */,
 				8AB2B53522238C8C00B458F3 /* Pipeline.swift in Sources */,
 				8A85FE4E221FA7BE0072A58C /* AppDelegate.swift in Sources */,
 				8A85FE6E221FD9B50072A58C /* Context.swift in Sources */,
+				8AFD4F9C22250CD800EA654A /* ZoomBlurViewController.swift in Sources */,
 				8A2ED04F221FFA7800578171 /* Rendering.swift in Sources */,
 				8A85FE68221FAA3F0072A58C /* Position.swift in Sources */,
 				8AB2B53B2223C90900B458F3 /* BasicOperation.swift in Sources */,
 				8A85FE66221FA8B30072A58C /* Color.swift in Sources */,
 				8AB2B53E2223D07100B458F3 /* Passthrough.metal in Sources */,
 				8AB2B55C2223DB3600B458F3 /* StretchFilter.swift in Sources */,
+				8AFD4F9822250BD400EA654A /* ZoomBlur.swift in Sources */,
 				8AB2B5402223D0A800B458F3 /* LookupFilter.swift in Sources */,
 				8AB2B56A2223F93800B458F3 /* SaturationFilter.metal in Sources */,
 				8A2ED04B221FED8300578171 /* Texture.swift in Sources */,
